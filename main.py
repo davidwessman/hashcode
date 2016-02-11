@@ -1,6 +1,7 @@
 from order import *
 from warehouse import *
 from drone import *
+import sys
 
 weights = []
 warehouses = []
@@ -17,19 +18,19 @@ C = 0
 
 
 
-f = open("mother_of_all_warehouses.in")
+f = open("busy_day.in")
 
 lines = f.readline().split(" ")
 
 r = int(lines[0])
 c = int(lines[1])
 D = int(lines[2])
-for i in range(D):
-    drones.append(Drone())
 T = int(lines[3])
 L = int(lines[4])
 
 P = int(f.readline())
+for i in range(D):
+    drones.append(Drone(P))
 lines = f.readline().split(" ")
 for l in lines:
     weights.append(int(l))
@@ -40,17 +41,44 @@ for i in range(W):
 
 C = int(f.readline())
 for i in range(C):
-    orders.append(Order(f.readline(), f.readline(), f.readline()))
+    orders.append(Order(f.readline(), f.readline(), f.readline(), P))
 
 f.close()
 
 
 
-print("row", r)
-print("column", c)
-print("drones", D)
-print("deadline", T)
-print("load", L)
-print("products", P)
-print("warehouses", W)
-print("customer orders", C)
+    
+def dist(a, b, c, d):
+    return math.ceil(((a-b)**2 + (c-d)**2)**0.5)
+
+
+order = 0
+for d in drones:
+    t = 0
+    warehouse = 0
+    while t < T:
+        for i in range(P):
+            allfail = True
+            o = orders[order]
+            w = warehouses[warehouse]
+            n = min(o.prod[i], min(L / weights[i], w.items[i]))
+            if n > 0:
+                if d.distance(w.r, w.c) + dist(w.r, o.r, w.c, o.c) + 2 + t < T:
+                    allfail = False
+                    d.load(w, i, n)
+                    d.deliver(o.r, o.c, order, i, n)
+                    t = d.free
+                    w.items[i] -= n
+                    o.prod[i] -= n
+                    warehouse = 0
+                    if sum(o.prod) == 0:
+                        order += 1
+                        if order >= C:
+                            sys.exit(1)
+        if allfail:
+            warehouse += 1
+        if warehouse >= W:
+            t = T
+            break;
+
+
