@@ -1,8 +1,9 @@
 class WareHouse:
 
     def __init__(self, line1, line2):
-        self.r = int(line1[0])
-        self.c = int(line1[2])
+        l = line1.split(" ")
+        self.r = int(l[0])
+        self.c = int(l[1])
         self.items = map(int, line2.split( ))
 
 
