@@ -1,4 +1,3 @@
-import numpy as num
 import math as math
 class Drone:
     i = 0
@@ -20,4 +19,4 @@ class Drone:
 
 
     def distance(self, r, c):
-        return math.ceil(num.sqrt((self.r-r)**2 + (self.c-c)**2))
+        return math.ceil(((self.r-r)**2 + (self.c-c)**2)**0.5)
