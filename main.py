@@ -33,9 +33,12 @@ def read(path):
     for i in range(C):
         orders.append(Order(f.readline(), f.readline(), f.readline()))
 
+    f.close()
+
 
 
 def main():
+    read("mother_of_all_warehouses.in")
 
 
 
