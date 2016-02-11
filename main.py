@@ -54,3 +54,17 @@ print("load", L)
 print("products", P)
 print("warehouses", W)
 print("customer orders", C)
+    
+
+
+order = 0
+for i in range(T):
+    for o in orders:
+        for i in o.items
+        for d in drones:
+            if drone.free <= i:
+                for w in warehouse:
+
+
+
+
