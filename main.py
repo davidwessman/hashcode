@@ -18,7 +18,9 @@ C = 0
 
 
 
+#f = open("mother_of_all_warehouses.in")
 f = open("busy_day.in")
+#f = open("redundancy.in")
 
 lines = f.readline().split(" ")
 
@@ -47,7 +49,7 @@ f.close()
 
 
 
-    
+
 def dist(a, b, c, d):
     return math.ceil(((a-b)**2 + (c-d)**2)**0.5)
 
@@ -61,7 +63,7 @@ for d in drones:
             allfail = True
             o = orders[order]
             w = warehouses[warehouse]
-            n = min(o.prod[i], min(L / weights[i], w.items[i]))
+            n = min(o.prod[i], min(int(L / weights[i]), w.items[i]))
             if n > 0:
                 if d.distance(w.r, w.c) + dist(w.r, o.r, w.c, o.c) + 2 + t < T:
                     allfail = False
