@@ -6,6 +6,15 @@ weights = []
 warehouses = []
 drones = []
 orders = []
+r = 0
+c = 0
+D = 0
+T = 0
+L = 0
+P = 0
+W = 0
+C = 0
+
 
 def read(path):
     f = open(path)
@@ -33,9 +42,21 @@ def read(path):
     for i in range(C):
         orders.append(Order(f.readline(), f.readline(), f.readline()))
 
+    f.close()
+
 
 
 def main():
+    read("mother_of_all_warehouses.in")
+    print(r)
+    print(c)
+    print(D)
+    print(T)
+    print(L)
+    print(P)
+    print(W)
+    print(C)
+    
 
 
 
